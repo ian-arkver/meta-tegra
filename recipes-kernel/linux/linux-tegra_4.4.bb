@@ -19,6 +19,8 @@ SRCREV = "79e4600e81c229ee8f9fc9a6f5703b7958f594f0"
 KERNEL_REPO = "github.com/madisongh/linux-tegra.git"
 SRC_URI = "git://${KERNEL_REPO};branch=${SRCBRANCH} \
 	   file://defconfig \
+	   file://0001-disable-new-gcc-7.1.1-warnings-for-now.patch \
+	   file://0002-Remove-duplicate-const-from-nVidia-drivers.patch \
 "
 S = "${WORKDIR}/git"
 

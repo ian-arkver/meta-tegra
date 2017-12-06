@@ -1,0 +1,86 @@
+From 53ecbef840b9b51814c84d1b469681858a47b0ec Mon Sep 17 00:00:00 2001
+Message-Id: <53ecbef840b9b51814c84d1b469681858a47b0ec.1512566476.git.ian.dev@arkver.com>
+From: Ian Jamison <ian.dev@arkver.com>
+Date: Wed, 6 Dec 2017 13:20:43 +0000
+Subject: [PATCH] Remove duplicate const from nVidia drivers
+
+---
+ drivers/iio/imu/nvi_mpu/nvi.h         | 2 +-
+ drivers/iio/imu/nvi_mpu/nvi_dmp_icm.c | 6 +++---
+ drivers/iio/imu/nvi_mpu/nvi_dmp_mpu.c | 2 +-
+ drivers/usb/gadget/udc/tegra_xudc.c   | 2 +-
+ 4 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/iio/imu/nvi_mpu/nvi.h b/drivers/iio/imu/nvi_mpu/nvi.h
+index c0d81a67c842..ea1d3fccc5e5 100644
+--- a/drivers/iio/imu/nvi_mpu/nvi.h
++++ b/drivers/iio/imu/nvi_mpu/nvi.h
+@@ -382,7 +382,7 @@ struct aux_ports {
+ };
+ 
+ struct nvi_dmp {
+-	const u8 const *fw;
++	const u8 *fw;
+ 	unsigned int fw_ver;
+ 	unsigned int fw_len;
+ 	unsigned int fw_crc32;
+diff --git a/drivers/iio/imu/nvi_mpu/nvi_dmp_icm.c b/drivers/iio/imu/nvi_mpu/nvi_dmp_icm.c
+index a34ef0a63e00..67f752e21446 100644
+--- a/drivers/iio/imu/nvi_mpu/nvi_dmp_icm.c
++++ b/drivers/iio/imu/nvi_mpu/nvi_dmp_icm.c
+@@ -1422,7 +1422,7 @@ static int nvi_dmp_en(struct nvi_state *st)
+ }
+ 
+ #if ICM_DMP_FW_VER == 0
+-static const u8 const dmp_fw_20628[] = {
++static const u8 dmp_fw_20628[] = {
+ 	/* bank 0: 0x0090 */
+ 	0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+ 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+@@ -2330,7 +2330,7 @@ static const u8 const dmp_fw_20628[] = {
+ 	0x00, 0xD8, 0xF1, 0xFF
+ };
+ #elif ICM_DMP_FW_VER == 1
+-static const u8 const dmp_fw_20628[] = {
++static const u8 dmp_fw_20628[] = {
+ 	/* bank 0: 0x0090 */
+ 	0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+ 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+@@ -3240,7 +3240,7 @@ static const u8 const dmp_fw_20628[] = {
+ 	0xD9, 0x00, 0xD8, 0xF1, 0xFF
+ };
+ #else /* ICM_DMP_FW_VER == 2 */
+-static const u8 const dmp_fw_20628[] = {
++static const u8 dmp_fw_20628[] = {
+ 	/* bank 0: 0x0090 */
+ 	0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+ 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+diff --git a/drivers/iio/imu/nvi_mpu/nvi_dmp_mpu.c b/drivers/iio/imu/nvi_mpu/nvi_dmp_mpu.c
+index 61bf2f122b09..43311eff6639 100644
+--- a/drivers/iio/imu/nvi_mpu/nvi_dmp_mpu.c
++++ b/drivers/iio/imu/nvi_mpu/nvi_dmp_mpu.c
+@@ -705,7 +705,7 @@ static int nvi_dmp_en(struct nvi_state *st)
+ 	return ret;
+ }
+ 
+-static const u8 const dmp_fw_6515[] = {
++static const u8 dmp_fw_6515[] = {
+ 	/* bank 0: 0x0020 */
+ 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+ 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+diff --git a/drivers/usb/gadget/udc/tegra_xudc.c b/drivers/usb/gadget/udc/tegra_xudc.c
+index a62c260d0f40..578bc8f16034 100644
+--- a/drivers/usb/gadget/udc/tegra_xudc.c
++++ b/drivers/usb/gadget/udc/tegra_xudc.c
+@@ -306,7 +306,7 @@ BUILD_EP_CONTEXT_RW(data_offset, rsvd[2], 0, 0x1ffff)
+ BUILD_EP_CONTEXT_RW(numtrbs, rsvd[2], 22, 0x1f)
+ BUILD_EP_CONTEXT_RW(devaddr, rsvd[6], 0, 0x7f)
+ 
+-static const char const driver_name[] = "tegra-xudc-new";
++static const char driver_name[] = "tegra-xudc-new";
+ static inline u64 ep_ctx_read_deq_ptr(struct tegra_xudc_ep_context *ctx)
+ {
+ 	return ((u64)ep_ctx_read_deq_hi(ctx) << 32) |
+-- 
+2.15.1
+
